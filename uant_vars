@@ -1,0 +1,3 @@
+#specific UANT variables, make sure that all the TOS variables are set as well $MAKERULES, $TOSROOT etc...
+export UANT=/home/torres/uant/trunk
+export PYTHONPATH=$UANT/support/sdk/python:$UANT/digital

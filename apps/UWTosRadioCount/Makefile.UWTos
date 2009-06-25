@@ -1,0 +1,5 @@
+#!/bin/bash
+make micaz sim-sf
+g++ -g -c -o UWTos.o UWTos.c -i../../tos/lib/tossim/sf/
+g++ -o UWTos UWTos.o build/micaz/tossim.o build/micaz/sim.o build/micaz/c-support.o
+

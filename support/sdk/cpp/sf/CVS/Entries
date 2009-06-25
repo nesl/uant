@@ -1,0 +1,19 @@
+/Makefile/1.2/Fri Jul  6 20:29:12 2007//
+/README.txt/1.2/Fri Jul  6 20:29:12 2007//
+/basecomm.cpp/1.3/Mon Apr 21 19:57:47 2008//
+/basecomm.h/1.3/Mon Apr 21 19:57:47 2008//
+/build.xml/1.2/Wed Aug 15 22:04:30 2007//
+/packetbuffer.cpp/1.3/Mon Apr 21 19:57:47 2008//
+/packetbuffer.h/1.3/Mon Apr 21 19:57:47 2008//
+/serialcomm.cpp/1.6/Mon Mar 23 11:28:02 2009//
+/serialcomm.h/1.4/Fri Feb 20 09:27:46 2009//
+/serialprotocol.h/1.2/Fri Jul  6 20:29:12 2007//
+/sf.cpp/1.3/Wed Jul 18 11:12:59 2007//
+/sfcontrol.cpp/1.5/Fri Feb 20 09:27:46 2009//
+/sfcontrol.h/1.3/Thu Jul 19 08:23:09 2007//
+/sfpacket.cpp/1.5/Fri Feb 20 09:27:46 2009//
+/sfpacket.h/1.3/Fri May  2 09:21:22 2008//
+/sharedinfo.h/1.2/Fri Jul  6 20:29:12 2007//
+/tcpcomm.cpp/1.8/Fri Feb 20 09:27:46 2009//
+/tcpcomm.h/1.4/Mon Apr 21 19:57:46 2008//
+D

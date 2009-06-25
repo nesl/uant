@@ -1,0 +1,31 @@
+Underwater Acoustic Networking plaTform (UANT)
+
+UANT uses GNU Radio for physical layer communication
+and TinyOS for a MAC layer. This provides configurability
+at both the PHY and MAC layers. UANT can be assigned an IP 
+address from Linux allowing for a full TCP/IP stack.
+Applications can not only be run from Linux but also
+TinyOS applications can be run through a TOSSIM simulation.
+
+The uant.pl is a perl-tk GUI that allows you to enter the configurable
+parameters and start the underwater modem. Currently the
+TinyOS application RadioCountToLeds is used along with the option
+for linux applications.
+
+To use:
+$ sudo su
+# source uant_vars
+# ./uant.pl
+
+Important note about time:
+If you are only using applications from Linux there is no need
+to throttle the TOSSIM simulation. If the simulation is throttled
+the performance is hurt quite dramatically (factor of 5-10). However if
+running a TinyOS application it is important to throttle the simulation
+otherwise the notion of time in on the running nodes will not match
+"wall" time.
+
+Currently throttle is disabled in the 'linux' app that does not run 
+TinyOS application and is enabled otherwise.
+To toggle throttle on/off please see UWTos.c and (un)comment the necessary lines.
+

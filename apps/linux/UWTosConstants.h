@@ -1,0 +1,14 @@
+#ifndef UWTOS_CONSTANTS_H
+#define UWTOS_CONSTANTS_H
+
+
+enum {
+  AM_GR_SERIAL_MSG = 0x2D,
+  AM_TAP_SERIAL_MSG = 0x2C,
+  AM_MAC_MSG = 0x2E,
+  AM_APP_MSG = 0x2F,
+  QUEUE_SIZE = 100,
+  TAP_WATCHDOG_TIMER = 1000,
+};
+
+#endif
