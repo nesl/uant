@@ -64,7 +64,7 @@ implementation {
 
   components new QueueC(message_t, QUEUE_SIZE) as GRQueue;
   components new QueueC(message_t, QUEUE_SIZE) as TapQueue;
-  components new TimerMilliC();
+  components new TimerMilliC() as t1;
   components new TimerMilliC() as RadioTime;
   components new TimerMilliC() as MacTime;
   components new TimerMilliC() as TapTime;
@@ -106,7 +106,7 @@ implementation {
   Con.TapAMPacket -> TapAM;
   Con.TapQueue -> TapQueue;
 
-  Con.MilliTimer -> TimerMilliC;
+  Con.MilliTimer1 -> t1;
 }
 
 

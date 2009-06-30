@@ -8,7 +8,7 @@ use Getopt::Long;
 use Sys::Hostname;
 if ($> != 0)
 {
-	print "you must be root to run\nUSAGE:\n\$ sudo su\n# source uant_vars\n# ./uant.pl \n";
+	print "you must be root to run\nUSAGE:\n\$ sudo su\n# source uant_vars\n# ./uant.pl [OPTIONS]\n";
 	exit 0;
 }
 ####get options
@@ -30,7 +30,9 @@ GetOptions("gui!" => \$gui,
 		"a|amplitude=s" => \$phy_def[1],
 		"min=s" => \$mac_def[0],
 		"max=s" => \$mac_def[1],
-		"retransmit=s" => \$mac_def[2]);
+		"transmit=s" => \$mac_def[2],
+		"n|node=s" => \$misc_def[0],
+		"mtu=s" => \$misc_def[1]);
 
 our $window = MainWindow->new;
 $top = $window->Frame();

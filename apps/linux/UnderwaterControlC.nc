@@ -51,7 +51,7 @@ module UnderwaterControlC {
     //interface AMSend as LinuxAppSend;
     //interface Receive as LinuxAppReceive;
 
-    interface Timer<TMilli> as MilliTimer;
+    interface Timer<TMilli> as MilliTimer1;
     interface AMSend as GRSend;
     interface AMSend as TapSend;
   }
@@ -75,13 +75,13 @@ implementation {
   event void Boot.booted() {
     //packet_payload = (serial_packet_t*)call Packet.getPayload(&packet, sizeof(serial_packet_t));
     call GRControl.start();
+    call MilliTimer1.startPeriodicAt(1,1);
   }
-  
-  event void MilliTimer.fired() {
-    dbg("counter", "timer fired");
+ 
+  //milli timer is used for throttle to work properly
+  event void MilliTimer1.fired() {
+    //dbg("counter", "timer fired");
   }
-
-
 
   //we have just received something from gnuradio
   //and now it should be sent up to linux if 
@@ -89,28 +89,23 @@ implementation {
   //send ACK
   event message_t* GRReceive.receive(message_t* msg, 
 				   void* payload, uint8_t len) {
-
-	if(call GRAMPacket.group(msg) == AM_TAP_SERIAL_MSG)
-	{
-		call TapQueue.enqueue(*msg);
-		if (taplocked) {
-	    		dbg("tap", "added one to queue %x\n", len);
-	    	}
-		else{
-			
-			tap_msg = call TapQueue.dequeue();
-			call tapTimer.startOneShot(TAP_WATCHDOG_TIMER);
-			if (call TapSend.send(AM_BROADCAST_ADDR, &tap_msg, call TapPacket.payloadLength(&tap_msg)) == SUCCESS) {
-				taplocked = TRUE;
-				dbg("tap","sent to linux\n");
-			}
-		      	else{
-				dbg("tap", "could not send to linux\n");
-			}
+	call TapQueue.enqueue(*msg);
+	if (taplocked) {
+    		dbg("tap", "added one to queue %x\n", len);
+    	}
+	else{
+		
+		tap_msg = call TapQueue.dequeue();
+		call tapTimer.startOneShot(TAP_WATCHDOG_TIMER);
+		if (call TapSend.send(AM_BROADCAST_ADDR, &tap_msg, call TapPacket.payloadLength(&tap_msg)) == SUCCESS) {
+			taplocked = TRUE;
+			dbg("tap","sent to linux\n");
 		}
-		return msg;
+	      	else{
+			dbg("tap", "could not send to linux\n");
+		}
 	}
-		return msg;
+	return msg;
   }
 
   //received from linux---need to send over USRP through water

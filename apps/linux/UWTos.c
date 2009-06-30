@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
 		Radio* r = t->radio();
 		SerialForwarder* tapsf = new SerialForwarder(9003);
 		//UNCOMMENT TWO LINES BELOW FOR THROTTLE
-		//Throttle* throt = new Throttle(t, 10);
-		//throt->initialize();
+		Throttle* throt = new Throttle(t, 10);
+		throt->initialize();
 		//
 		//add or remove channels as necessary for debugging purposes
 		t->addChannel("Serial", stdout);
@@ -43,15 +43,25 @@ int main(int argc, char *argv[]) {
 		//expecting node id from command line
 		Mote* m = t->getNode(node_id);
 		m->bootAtTime(1);
+		/*
+		
+		for (int i = 200; i < 221; i++)
+		{
+			if(i != node_id)
+			{
+				m = t->getNode(i);
+				m->bootAtTime(i*(20.0/100.0));
+			}
+		}*/
 		while(1) {
 			t->runNextEvent();
 			tapsf->process();
 			//microsleep is used only if there is no throttle
 			//it prevents the CPU from using 100% in this 
 			//infinite loop
-			usleep(2000);
+			//usleep(2000);
 			//UNCOMMENT LINE BELOW FOR THROTTLE
-			//throt->checkThrottle();
+			throt->checkThrottle();
 		}
 	}
 }

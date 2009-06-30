@@ -1,5 +1,9 @@
 Underwater Acoustic Networking plaTform (UANT)
 
+Network and Embedded System Laboratory (NESL)
+University of California Los Angeles
+
+
 UANT uses GNU Radio for physical layer communication
 and TinyOS for a MAC layer. This provides configurability
 at both the PHY and MAC layers. UANT can be assigned an IP 
@@ -15,17 +19,8 @@ for linux applications.
 To use:
 $ sudo su
 # source uant_vars
-# ./uant.pl
+# ./uant.pl [OPTIONS]
 
-Important note about time:
-If you are only using applications from Linux there is no need
-to throttle the TOSSIM simulation. If the simulation is throttled
-the performance is hurt quite dramatically (factor of 5-10). However if
-running a TinyOS application it is important to throttle the simulation
-otherwise the notion of time in on the running nodes will not match
-"wall" time.
 
-Currently throttle is disabled in the 'linux' app that does not run 
-TinyOS application and is enabled otherwise.
-To toggle throttle on/off please see UWTos.c and (un)comment the necessary lines.
-
+Questions? 
+Contact Dustin Torres at dustintorres@ucla.edu
