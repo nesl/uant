@@ -1,6 +1,6 @@
 // $Id: RadioCountToLedsC.nc,v 1.6 2008/06/24 05:32:31 regehr Exp $
 
-/*									tab:4
+/*                                  tab:4
  * "Copyright (c) 2000-2005 The Regents of the University  of California.  
  * All rights reserved.
  *
@@ -88,19 +88,19 @@ implementation {
     else {
       radio_count_msg_t* rcm = (radio_count_msg_t*)call Packet.getPayload(&packet, sizeof(radio_count_msg_t));
       if (rcm == NULL) {
-	return;
+    return;
       }
 
       rcm->counter = counter;
       if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(radio_count_msg_t)) == SUCCESS) {
-	dbg("RadioCountToLedsC", "RadioCountToLedsC: packet sent. %hu\n", counter);	
-	locked = TRUE;
+    dbg("RadioCountToLedsC", "RadioCountToLedsC: packet sent. %hu\n", counter); 
+    locked = TRUE;
       }
     }
   }
 
   event message_t* Receive.receive(message_t* bufPtr, 
-				   void* payload, uint8_t len) {
+                   void* payload, uint8_t len) {
     dbg("RadioCountToLedsC", "Received packet of length %hhu.\n", len);
     if (len != sizeof(radio_count_msg_t)) {return bufPtr;}
     else {
@@ -108,22 +108,22 @@ implementation {
       dbg("RadioCountToLedsC", "Counter is %hhu.\n", rcm->counter);
 
       if (rcm->counter & 0x1) {
-	call Leds.led0On();
+    call Leds.led0On();
       }
       else {
-	call Leds.led0Off();
+    call Leds.led0Off();
       }
       if (rcm->counter & 0x2) {
-	call Leds.led1On();
+    call Leds.led1On();
       }
       else {
-	call Leds.led1Off();
+    call Leds.led1Off();
       }
       if (rcm->counter & 0x4) {
-	call Leds.led2On();
+    call Leds.led2On();
       }
       else {
-	call Leds.led2Off();
+    call Leds.led2Off();
       }
       return bufPtr;
     }
@@ -131,12 +131,12 @@ implementation {
 
   event void AMSend.sendDone(message_t* bufPtr, error_t error) {
     //if (&packet == bufPtr) {
-  	dbg("RadioCountToLedsC", "send done\n");
+    dbg("RadioCountToLedsC", "send done\n");
       locked = FALSE;
     //}
     //else
     //{
-  //	dbg("RadioCountToLedsC", "NEVER EVER EVER SEE THIS EVER UH OH\n");
+  //    dbg("RadioCountToLedsC", "NEVER EVER EVER SEE THIS EVER UH OH\n");
    // }
   }
 

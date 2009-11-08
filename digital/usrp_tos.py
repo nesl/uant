@@ -68,13 +68,13 @@ class my_top_block(gr.top_block):
                  rx_callback, options):
 
         gr.top_block.__init__(self)
-	self.node_id = options.nodeid
+        self.node_id = options.nodeid
         self.txpath = transmit_path(mod_class, options)
         self.rxpath = receive_path(demod_class, rx_callback, options)
 
-	self.connect(self.txpath);
-	self.connect(self.rxpath);
-	
+        self.connect(self.txpath);
+        self.connect(self.rxpath);
+        
     def send_pkt(self, payload='', eof=False):
         return self.txpath.send_pkt(payload, eof)
 
@@ -94,29 +94,29 @@ class cs_mac(object):
         self.tb = None             # top block (access to PHY)
 
         self.mif = MoteIF.MoteIF()
-	self.tos_source = self.mif.addSource("sf@localhost:9003")
-	#listen for all of these messages
-	self.mif.addListener(self, RadioCountMsg)
-	self.mif.addListener(self, GRSerialMsg)
-	self.mif.addListener(self, AlohaMsg)
+        self.tos_source = self.mif.addSource("sf@localhost:9003")
+        #listen for all of these messages
+        self.mif.addListener(self, RadioCountMsg)
+        self.mif.addListener(self, GRSerialMsg)
+        self.mif.addListener(self, AlohaMsg)
 
 
     def receive(self, src, msg): #received from TOS not from radio, need to send out to radio
-	print "received from tos, sending to GR"
-	print map(lambda (x): hex(ord(x)), msg.dataGet())
+        print "received from tos, sending to GR"
+        #print map(lambda (x): hex(ord(x)), msg.dataGet())
         self.tb.send_pkt(msg.dataGet())
 
     def send_to_tos(self, payload):
-	data = chr(Serial.TOS_SERIAL_ACTIVE_MESSAGE_ID) #it is a serial message
-	data += chr(0)
-	#data += chr(self.tb.node_id)
-	if int(ord(payload[2])) == 255:
-		data += chr(self.tb.node_id)
-	else:
-		data += payload[2]
-	data += payload[3:len(payload)]
-	#print map(lambda (x): hex(ord(x)), data)
-	self.tos_source.writePacket(data) #write that all
+        data = chr(Serial.TOS_SERIAL_ACTIVE_MESSAGE_ID) #it is a serial message
+        data += chr(0)
+        #data += chr(self.tb.node_id)
+        if int(ord(payload[2])) == 255:
+                data += chr(self.tb.node_id)
+        else:
+                data += payload[2]
+        data += payload[3:len(payload)]
+        #print map(lambda (x): hex(ord(x)), data)
+        self.tos_source.writePacket(data) #write that all
 
     def set_top_block(self, tb):
         self.tb = tb
@@ -128,11 +128,11 @@ class cs_mac(object):
         @param ok: bool indicating whether payload CRC was OK
         @param payload: contents of the packet (string)
         """
-	
+        
         if self.verbose:
             print "Rx: ok = %r  len(payload) = %4d" % (ok, len(payload))
         if ok: #need to actually write to serial out
-	    self.send_to_tos(payload)
+            self.send_to_tos(payload)
 
 
 
@@ -190,7 +190,7 @@ def main():
     if r == gr.RT_OK:
         realtime = True
     else:
-    	realtime = False
+        realtime = False
         print "Note: failed to enable realtime scheduling"
 
 

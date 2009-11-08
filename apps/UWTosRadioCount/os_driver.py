@@ -49,14 +49,14 @@ tapsf = SerialForwarder(9003)
 throttle = Throttle(t, 10)
 
 #t.addChannel("counter", sys.stdout);
-t.addChannel("receive", sys.stdout);
-t.addChannel("tap", sys.stdout);
+#t.addChannel("receive", sys.stdout);
+#t.addChannel("tap", sys.stdout);
 #t.addChannel("gr", sys.stdout);
-t.addChannel("RadioCountToLedsC", sys.stdout);
+#t.addChannel("RadioCountToLedsC", sys.stdout);
 #t.addChannel("SimMoteP", sys.stdout);
-t.addChannel("Serial", sys.stdout);
-t.addChannel("MAC", sys.stdout);
-t.addChannel("control", sys.stdout);
+#t.addChannel("Serial", sys.stdout);
+#t.addChannel("MAC", sys.stdout);
+#t.addChannel("control", sys.stdout);
 
 
 m = t.getNode(3)
@@ -70,6 +70,4 @@ while(1):
   t.runNextEvent();
   tapsf.process();
 
-print "SLEEPING FOR 8 DAYS KILL ME ONCE YOU HAVE KILLED usrp_tos.py"
-time.sleep(8*24*60*60)
 #throttle.printStatistics()
