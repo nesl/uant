@@ -21,6 +21,27 @@ $ sudo su
 # source uant_vars
 # ./uant.pl [OPTIONS]
 
+To Install:
+Dependencies: 
+GNU Radio 
+TinyOS
+and all of their dependencies
+
+
+GNU Radio version supported: 3.2
+I have not tested it with other versions.
+
+Before building GNU Radio from source replace:
+
+/path/to/gnuradio/usrp/host/lib/legacy/db_basic.<cc, h>
+
+with:
+/path/to/uant/usrp/host/lib/legacy/db_basic.<cc, h>
+
+This allows a GPIO pin (io_tx[6]) to be used as a tx/rx switch.
+This is useful if you are using a front end with only one transducer
+that can be toggled with a digital input. 
+
 
 Questions? 
 Contact Dustin Torres at dustintorres@ucla.edu
